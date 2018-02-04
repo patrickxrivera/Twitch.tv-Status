@@ -83,3 +83,7 @@ body {
   margin-left: 0.7rem;
   padding-bottom: -5rem;
 }
+
+.search__input input {
+  width: 280px;
+}
