@@ -1,22 +1,85 @@
-.container {
+body {
+  background-color: #eaf1f3;
+}
+
+.container__main {
   border: 2px solid red;
-  padding: 0.5rem 1rem;
   margin: 2.5rem auto;
   height: 80vh;
-  width: 35%;
+  width: 30%;
 }
 
 .header {
-  border: 2px solid blue;
+  padding: 0.5rem 1rem;
   height: 10%;
   display: flex;
+  background-color: #fff;
 }
 
 .header__logo,
-.header__menu,
+.header__title,
 .header__filter {
-  border: 2px dashed orange;
   width: 33.3%;
   align-self: center;
+}
+
+.header__title,
+.nav__all,
+.nav__online,
+.nav__offline {
   text-align: center;
+}
+
+.header__filter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.svg-inline--fa {
+  margin-top: 0.4rem;
+  height: 1.25rem;
+}
+
+.svg-inline--fa.fa-w-14 {
+  width: 1.25rem;
+}
+
+.header__filter svg {
+  height: 20px;
+  width: 20px;
+}
+
+.search svg {
+  height: 16px;
+  width: 16px;
+  margin-bottom: -0.2rem;
+}
+
+.container__inner {
+  width: 85%;
+  margin: 0.75rem auto;
+  padding: 1rem;
+  background-color: #fff;
+  height: 60%;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav__all,
+.nav__online,
+.nav__offline {
+  width: 20%;
+}
+
+.search {
+  margin-top: 1.25rem;
+  display: flex;
+}
+
+.search__input {
+  margin-left: 0.7rem;
+  padding-bottom: -5rem;
 }

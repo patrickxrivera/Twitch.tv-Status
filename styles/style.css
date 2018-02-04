@@ -1,0 +1,43 @@
+body {
+  letter-spacing: 1px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container__main {
+  border: 0 solid #eaf1f3;
+  border-radius: 0.2rem;
+  box-shadow: rgba(23,43,99,0.26) 0 7px 42px;
+}
+
+.header__title {
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.nav__all {
+  color: #613DA1;
+  font-weight: bold;
+  border-bottom: 2px solid #613DA1;
+}
+
+.nav__online,
+.nav__offline {
+  opacity: 0.2;
+}
+
+.search {
+  border-bottom: .75px solid #dfe6e9;
+}
+
+.search__icon,
+::placeholder {
+    opacity: 0.3;
+}
+
+.search__input input {
+  border: none;
+  letter-spacing: 0.5px;
+  font-size: 1rem;
+  font-family: 'Open Sans', sans-serif;
+  caret-color: #613DA1;
+}

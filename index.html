@@ -3,14 +3,22 @@
   <head>
     <meta charset="utf-8">
     <title>Twitch.tv</title>
-    <link href="./styles/master.css">
+    <link rel="stylesheet" href="./styles/master.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400:700|Playfair+Display:700" rel="stylesheet">
     <script src="./node_modules/feather-icons/dist/feather.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container__main">
 
       <div class="header">
-        <div class="header__menu">
+        <div class="header__logo">
+          <i class="fab fa-twitch"></i>
+        </div>
+        <div class="header__title">
+          Following
+        </div>
+        <div class="header__filter">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -22,32 +30,54 @@
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <line x1="3" y1="12" x2="21" y2="12" />
-            <line x1="3" y1="6" x2="21" y2="6" />
-            <line x1="3" y1="18" x2="21" y2="18" />
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
           </svg>
-        </div>
-        <div class="header__logo">
-          Following
-        </div>
-        <div class="header__filter">
-
         </div>
       </div> <!-- header -->
 
-      <div class="nav">
+      <div class="container__inner">
 
-      </div> <!-- nav -->
+        <div class="nav">
+          <div class="nav__all">
+            <span>All</span>
+          </div>
+          <div class="nav__online">
+            <span>Online</span>
+          </div>
+          <div class="nav__offline">
+            <span>Offline</span>
+          </div>
+        </div> <!-- nav -->
 
-      <div class="search">
+        <div class="search">
+          <div class="search__icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </div>
+          <div class="search__input">
+            <input type="text" placeholder="Search" name="" value="">
+          </div>
+        </div> <!-- search -->
 
-      </div> <!-- search -->
+        <div class="results">
 
-      <div class="results">
+        </div> <!-- results -->
 
-      </div> <!-- results -->
+      </div> <!-- inner container -->
 
-    </div> <!-- container -->
+    </div> <!-- main container -->
 
     <script src="./app/main.js" charset="utf-8"></script>
   </body>
