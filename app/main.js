@@ -21,10 +21,6 @@ const Data = (function() {
     this.url = `https://wind-bow.glitch.me/twitch-api/${type}/${username}`;
   }
 
-  Endpoint.prototype.getUrl = function() {
-    return this.url;
-  }
-
   const publicApi = {
     getStreamerData
   }
@@ -85,13 +81,13 @@ const Data = (function() {
   }
 
   async function getChannelDataFor(username) {
-    const channelUrl = new Endpoint('channels', username).getUrl();
+    const channelUrl = new Endpoint('channels', username).url;
     const channelData = await getJsonFrom(channelUrl);
     return channelData;
   }
 
   async function getStatusDataFor(username) {
-    const statusUrl = new Endpoint('streams', username).getUrl();
+    const statusUrl = new Endpoint('streams', username).url;
     const statusData = await getJsonFrom(statusUrl);
     return statusData;
   }
