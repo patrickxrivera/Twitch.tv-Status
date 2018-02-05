@@ -10,20 +10,22 @@ const App = (function() {
 
   async function init() {
     const streamerData = await Data.getStreamerData();
-    UI.renderAll(streamerData);
+    UI.render(streamerData);
     UI.setAnimations();
   }
 
 }());
 
 const Data = (function() {
+  let streamerData;
 
   function Endpoint(type, username) {
     this.url = `https://wind-bow.glitch.me/twitch-api/${type}/${username}`;
   }
 
   const publicApi = {
-    getStreamerData
+    getStreamerData,
+    filterStreamers
   }
 
   return publicApi;
@@ -31,38 +33,46 @@ const Data = (function() {
   // **************************
 
   async function getStreamerData() {
-    var streamerData = {
+    streamerData = {
       "ESL_SC2": {
         logo: null,
-        online: null
+        online: null,
+        url: null
       },
       OgamingSC2: {
         logo: null,
-        online: null
+        online: null,
+        url: null
       },
       cretetion: {
         logo: null,
-        online: null
+        online: null,
+        url: null
       },
       freecodecamp: {
         logo: null,
-        online: null
+        online: null,
+        url: null
       },
       storbeck: {
         logo: null,
-        online: null
+        online: null,
+        url: null
       },
       habathcx: {
         logo: null,
-        online: null
+        online: null,
+        url: null
       },
       RobotCaleb: {
         logo: null,
-        online: null
+        online: null,
+        url: null
       },
       noobs2ninjas: {
         logo: null,
-        online: null
+        online: null,
+        url: null
       }
     }
 
@@ -76,6 +86,7 @@ const Data = (function() {
       const statusData = await getStatusDataFor(username);
       streamerData[username].logo = channelData.logo;
       streamerData[username].online = statusData.stream ? true : false;
+      streamerData[username].url = channelData.url;
     }
 
     return streamerData;
@@ -104,27 +115,59 @@ const Data = (function() {
     }
   }
 
+  function filterStreamers(keep) {
+    let results = {};
+
+    for (let streamer in streamerData) {
+      const value = streamerData[streamer];
+
+      if (selectedAll(keep)) { results[streamer] = value; }
+      else if (selectedOnline(keep, value)) { results[streamer] = value; }
+      else if (selectedOffline(keep, value)) { results[streamer] = value; }
+    }
+
+    UI.render(results);
+  }
+
+  function selectedAll(keep) {
+    return keep === 'All';
+  }
+
+  function selectedOnline(keep, value) {
+    return keep === 'Online' && value.online;
+  }
+
+  function selectedOffline(keep, value) {
+    return keep === 'Offline' && !value.online;
+  }
 }());
 
 const UI = (function() {
 
   const publicApi = {
-    renderAll,
+    render,
     setAnimations
   }
 
   return publicApi;
 
-  function renderAll(streamerData) {
+  function render(streamerData) { // TODO better name
+    const results = document.getElementsByClassName('results')[0];
+    results.innerHTML = '';
     for (let streamer in streamerData) {
       const data = {};
-      [data.username, data.logo, data.online] = [streamer, streamerData[streamer].logo, streamerData[streamer].online];
-      render(data);
+      [data.username, data.logo, data.online, data.url] =
+        [
+          streamer,
+          streamerData[streamer].logo,
+          streamerData[streamer].online,
+          streamerData[streamer].url
+        ];
+      renderHTMLFor(data, results);
     }
   }
 
-  function render(data) {
-    const results = document.getElementsByClassName('results')[0];
+  function renderHTMLFor(data, results) {
     const resultEntry = createResultEntryEl(data);
     results.appendChild(resultEntry);
   }
@@ -139,13 +182,15 @@ const UI = (function() {
   function constructHTMLFor(data) {
     const status = getStatusFrom(data);
     let resultsHTML =
-      `<div class="results__container">
-        <img class="results__logo" src="${data.logo}" alt="">
-        <span class="results__username">${data.username}</span>
-        <div class="results__status-container">
-          <div class="${status}"></div>
+      `<a href="${data.url}" target="_blank">
+        <div class="results__container">
+          <img class="results__logo" src="${data.logo}" alt="">
+          <span class="results__username">${data.username}</span>
+          <div class="results__status-container">
+            <div class="${status}"></div>
+          </div>
         </div>
-       </div>`
+       </a>`
     return resultsHTML;
   }
 
@@ -154,15 +199,10 @@ const UI = (function() {
   }
 
   function setAnimations() {
-    // highlight nav__all on start
-    // add click event listener for nav elements
+    setNavAnimations();
+  }
 
-    // add click event
-      // loop through nav els and add click listener
-        // onclick,
-        // remove class from all
-        // add class to clicked el
-
+  function setNavAnimations() {
     const navEls = document.querySelectorAll('.nav div');
     navEls.forEach(el => el.addEventListener('click', () => addNavAnimations.call(el, navEls)));
   }
@@ -170,6 +210,7 @@ const UI = (function() {
   function addNavAnimations(navEls) {
     navEls.forEach(el => el.removeAttribute('id'));
     this.setAttribute('id', 'nav__clicked');
+    Data.filterStreamers(this.innerText);
   }
 
 }());
