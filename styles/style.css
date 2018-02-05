@@ -43,3 +43,8 @@ body {
   font-family: 'Open Sans', sans-serif;
   caret-color: #613DA1;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

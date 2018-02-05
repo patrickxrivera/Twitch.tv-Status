@@ -1,3 +1,8 @@
+html {
+    width:100vw;
+    overflow-x:hidden;
+}
+
 body {
   background-color: #eaf1f3;
 }
@@ -13,7 +18,7 @@ body {
   padding: 1.2rem 2rem;
   height: 10%;
   display: flex;
-  background-color: #fff;
+  background-color: #6747cd;
 }
 
 .header__logo,
@@ -21,6 +26,10 @@ body {
 .header__filter {
   width: 33.3%;
   align-self: center;
+}
+
+.header__title {
+  color: #fff;
 }
 
 .header__title,
@@ -42,6 +51,11 @@ body {
 
 .svg-inline--fa.fa-w-14 {
   width: 1.25rem;
+  color: #fff;
+}
+
+.header svg {
+  stroke: #fff;
 }
 
 .header__filter svg {
@@ -101,6 +115,7 @@ body {
 .results__entry {
   padding: 1.3rem .83rem;
   letter-spacing: 0.5px;
+  box-sizing: border-box;
 }
 
 .results__container {
