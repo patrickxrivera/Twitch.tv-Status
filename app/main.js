@@ -10,7 +10,8 @@ const App = (function() {
 
   async function init() {
     const streamerData = await Data.getStreamerData();
-    console.log(streamerData);
+    UI.renderAll(streamerData);
+    UI.setAnimations();
   }
 
 }());
@@ -101,6 +102,74 @@ const Data = (function() {
     catch(err) {
       console.warn('Error', err);
     }
+  }
+
+}());
+
+const UI = (function() {
+
+  const publicApi = {
+    renderAll,
+    setAnimations
+  }
+
+  return publicApi;
+
+  function renderAll(streamerData) {
+    for (let streamer in streamerData) {
+      const data = {};
+      [data.username, data.logo, data.online] = [streamer, streamerData[streamer].logo, streamerData[streamer].online];
+      render(data);
+    }
+  }
+
+  function render(data) {
+    const results = document.getElementsByClassName('results')[0];
+    const resultEntry = createResultEntryEl(data);
+    results.appendChild(resultEntry);
+  }
+
+  function createResultEntryEl(data) {
+    const resultEntry = document.createElement('div');
+    resultEntry.classList.add('results__entry');
+    resultEntry.innerHTML = constructHTMLFor(data);
+    return resultEntry;
+  }
+
+  function constructHTMLFor(data) {
+    const status = getStatusFrom(data);
+    let resultsHTML =
+      `<div class="results__container">
+        <img class="results__logo" src="${data.logo}" alt="">
+        <span class="results__username">${data.username}</span>
+        <div class="results__status-container">
+          <div class="${status}"></div>
+        </div>
+       </div>`
+    return resultsHTML;
+  }
+
+  function getStatusFrom(data) {
+    return data.online ? 'results__status--online' : 'results__status--offline';
+  }
+
+  function setAnimations() {
+    // highlight nav__all on start
+    // add click event listener for nav elements
+
+    // add click event
+      // loop through nav els and add click listener
+        // onclick,
+        // remove class from all
+        // add class to clicked el
+
+    const navEls = document.querySelectorAll('.nav div');
+    navEls.forEach(el => el.addEventListener('click', () => addNavAnimations.call(el, navEls)));
+  }
+
+  function addNavAnimations(navEls) {
+    navEls.forEach(el => el.removeAttribute('id'));
+    this.setAttribute('id', 'nav__clicked');
   }
 
 }());

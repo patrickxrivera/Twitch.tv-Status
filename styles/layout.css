@@ -5,12 +5,12 @@ body {
 .container__main {
   border: 2px solid red;
   margin: 2.5rem auto;
-  height: 80vh;
   width: 30%;
+  padding-bottom: 0.01rem;
 }
 
 .header {
-  padding: 0.5rem 1.5rem;
+  padding: 1.2rem 2rem;
   height: 10%;
   display: flex;
   background-color: #fff;
@@ -62,8 +62,7 @@ body {
 
 .container__inner {
   width: 90%;
-  margin: 0.75rem auto;
-  /* padding: 1rem; */
+  margin: 1.3rem auto;
   background-color: #fff;
   height: 60%;
 }
@@ -78,6 +77,11 @@ body {
 .nav__online,
 .nav__offline {
   width: 20%;
+  padding-bottom: 0.3rem;
+}
+
+.nav span {
+  margin-bottom: 0.5rem;
 }
 
 .search {
@@ -95,7 +99,7 @@ body {
 }
 
 .results__entry {
-  padding: .75rem;
+  padding: 1.3rem .83rem;
   letter-spacing: 0.5px;
 }
 

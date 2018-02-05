@@ -1,3 +1,10 @@
 .search__input input {
   outline: none;
 }
+
+#nav__clicked {
+  color: #613DA1;
+  border-bottom: 2px solid #613DA1;
+  font-weight: bold;
+  opacity: 1;
+}

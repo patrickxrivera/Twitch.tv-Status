@@ -14,15 +14,16 @@ body {
   font-weight: bold;
 }
 
-.nav__all {
-  color: #613DA1;
-  font-weight: bold;
-  border-bottom: 2px solid #613DA1;
-}
-
+.nav__all,
 .nav__online,
 .nav__offline {
   opacity: 0.2;
+}
+
+.nav__all,
+.nav__online,
+.nav__offline {
+  cursor: pointer;
 }
 
 .search,
