@@ -9,11 +9,42 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   </head>
   <body>
+    <div class="dropdown">
+      <span class="dropdown__arrow"></span>
+      <div class="dropdown__container">
+        <div class="dropdown__header">
+          <h4>Filters <span class="dropdown__header-subscript">(3 Applied)</span></h4>
+        </div>
+        <div class="dropdown__list">
+          <div class="dropdown__list-item">
+            <input id="cbx_1" type="checkbox">
+            <label class="dropdown__cbx" for="cbx_1" data-category="Combat"></label>
+            <label class="dropdown__label" for="cbx_1">Combat</label>
+          </div>
+          <div class="dropdown__list-item">
+            <input id="cbx_2" type="checkbox">
+            <label class="dropdown__cbx" for="cbx_2"></label>
+            <label class="dropdown__label" for="cbx_2">Entertainment</label>
+          </div>
+          <div class="dropdown__list-item">
+            <input id="cbx_3" type="checkbox">
+            <label class="dropdown__cbx" for="cbx_3"></label>
+            <label class="dropdown__label" for="cbx_3">Programming</label>
+          </div>
+          <div class="dropdown__list-item">
+            <input id="cbx_4" type="checkbox">
+            <label class="dropdown__cbx" for="cbx_4"></label>
+            <label class="dropdown__label" for="cbx_4">Sports</label>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container__main">
-
       <div class="header">
         <div class="header__logo">
-          <i class="fab fa-twitch"></i>
+          <a href="https://www.twitch.tv/" target="_blank">
+            <i class="fab fa-twitch"></i>
+          </a>
         </div>
         <div class="header__title">
           Following

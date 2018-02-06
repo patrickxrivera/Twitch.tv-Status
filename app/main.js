@@ -12,6 +12,7 @@ const App = (function() {
     const streamerData = await Data.getStreamerData();
     UI.render(streamerData);
     UI.setAnimations();
+    UI.bindActions();
   }
 
 }());
@@ -25,7 +26,8 @@ const Data = (function() {
 
   const publicApi = {
     getStreamerData,
-    filterStreamers
+    filterNav,
+    filterSearch
   }
 
   return publicApi;
@@ -37,42 +39,62 @@ const Data = (function() {
       "ESL_SC2": {
         logo: null,
         online: null,
-        url: null
+        url: null,
+        category: 'Combat'
       },
       OgamingSC2: {
         logo: null,
         online: null,
-        url: null
+        url: null,
+        category: 'Combat'
       },
       cretetion: {
         logo: null,
         online: null,
-        url: null
+        url: null,
+        category: 'Combat'
       },
       freecodecamp: {
         logo: null,
         online: null,
-        url: null
+        url: null,
+        category: 'Programming'
       },
       storbeck: {
         logo: null,
         online: null,
-        url: null
-      },
-      habathcx: {
-        logo: null,
-        online: null,
-        url: null
+        url: null,
+        category: 'Sports'
       },
       RobotCaleb: {
         logo: null,
         online: null,
-        url: null
+        url: null,
+        category: 'Programming'
       },
       noobs2ninjas: {
         logo: null,
         online: null,
-        url: null
+        url: null,
+        category: 'Programming'
+      },
+      omgitsfirefoxx: {
+        logo: null,
+        online: null,
+        url: null,
+        category: 'Entertainment'
+      },
+      omgitsfirefoxx: {
+        logo: null,
+        online: null,
+        url: null,
+        category: 'Entertainment'
+      },
+      kindafunnygames: {
+        logo: null,
+        online: null,
+        url: null,
+        category: 'Entertainment'
       }
     }
 
@@ -84,11 +106,11 @@ const Data = (function() {
     for (let username in streamerData) {
       const channelData = await getChannelDataFor(username);
       const statusData = await getStatusDataFor(username);
+      // console.log(channelData);
       streamerData[username].logo = channelData.logo;
       streamerData[username].online = statusData.stream ? true : false;
       streamerData[username].url = channelData.url;
     }
-
     return streamerData;
   }
 
@@ -115,7 +137,7 @@ const Data = (function() {
     }
   }
 
-  function filterStreamers(keep) {
+  function filterNav(keep) {
     let results = {};
 
     for (let streamer in streamerData) {
@@ -140,13 +162,37 @@ const Data = (function() {
   function selectedOffline(keep, value) {
     return keep === 'Offline' && !value.online;
   }
+
+  function filterSearch(searchVal) {
+    let results = {};
+
+    for (let streamer in streamerData) {
+      if (isSearchVal(streamer, searchVal)) {
+        results[streamer] = streamerData[streamer];
+      }
+    }
+
+    UI.render(results);
+  }
+
+  function isSearchVal(streamer, searchVal) {
+    [streamer, searchVal] = [streamer.toLowerCase(), searchVal.toLowerCase()];
+    return streamer.startsWith(searchVal);
+  }
+
 }());
 
 const UI = (function() {
+  const dropdown = document.querySelector('.dropdown');
+  const header = document.querySelector('.header');
+  const mainContainer = document.querySelector('.container__main');
+  const innerContainer = document.querySelector('.container__inner');
+  let open = false; // TODO
 
   const publicApi = {
     render,
-    setAnimations
+    setAnimations,
+    bindActions
   }
 
   return publicApi;
@@ -210,7 +256,55 @@ const UI = (function() {
   function addNavAnimations(navEls) {
     navEls.forEach(el => el.removeAttribute('id'));
     this.setAttribute('id', 'nav__clicked');
-    Data.filterStreamers(this.innerText);
+    Data.filterNav(this.innerText);
+  }
+
+  function bindActions() {
+    handleSearch();
+    handleFilter();
+  }
+
+  function handleSearch() {
+    const input = document.querySelector('.search__input input');
+    input.addEventListener('keyup', getSearch);
+  }
+
+  function getSearch() {
+    const searchVal = this.value;
+    Data.filterSearch(searchVal);
+  }
+
+  function handleFilter() {
+    const filterIcon = document.querySelector('.header__filter svg');
+    filterIcon.addEventListener('click', checkFilterState);
+  }
+
+  function checkFilterState() {
+    open = !open;
+
+    open ? renderFilterEl() : removeFilterEl();
+  }
+
+  function renderFilterEl() {
+    addClass(dropdown, 'open');
+    addClass(mainContainer, 'modal');
+    addClass(innerContainer, 'darken');
+    addClass(header, 'darken');
+  }
+
+  function removeFilterEl() {
+    removeClass(dropdown, 'open');
+    removeClass(mainContainer, 'modal');
+    removeClass(innerContainer, 'darken');
+    removeClass(header, 'darken');
+  }
+
+  function removeClass(el, className) {
+    el.classList.remove(className);
+  }
+
+  function addClass(el, className) {
+    el.classList.add(className);
   }
 
 }());
